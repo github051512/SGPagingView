@@ -191,4 +191,43 @@
     return _badgeOff;
 }
 
+#pragma mark - - badgeNumber 相关属性
+- (UIColor *)badgeNumberBackgroudColor {
+    if (!_badgeNumberBackgroudColor) {
+        _badgeNumberBackgroudColor = [UIColor redColor];
+    }
+    return _badgeNumberBackgroudColor;
+}
+
+- (UIColor *)badgeNumberTextColor {
+    if (!_badgeNumberTextColor) {
+        _badgeNumberTextColor = [UIColor whiteColor];
+    }
+    return _badgeNumberTextColor;
+}
+
+- (CGFloat)badgeNumberSize {
+    if (!_badgeNumberSize) {
+        _badgeNumberSize = 14;
+    }
+    return _badgeNumberSize;
+}
+
+- (CGFloat)badgeNumberFontSize {
+    if (!_badgeNumberFontSize) {
+        _badgeNumberFontSize = 12.0f;
+    }
+    return _badgeNumberFontSize;
+}
+
+- (CGPoint)badgeNumberOff {
+   
+    if (!_badgeNumberOff.x && !_badgeNumberOff.y) {
+        
+        _badgeNumberOff = CGPointZero;
+    }
+    
+    return _badgeNumberOff;
+}
+
 @end

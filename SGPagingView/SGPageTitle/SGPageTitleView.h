@@ -63,6 +63,11 @@ typedef enum : NSUInteger {
 /** 根据标题下标值移除 badge */
 - (void)removeBadgeForIndex:(NSInteger)index;
 
+///根据下标题添加带有数字的Badge
+- (void)addBadgeNumberValueForIndex:(NSInteger)index badgeNumber:(NSInteger)badgeNumber;
+///根据下标题移除带有数字的Badge
+- (void)removeBadgeNumberValueForIndex:(NSInteger)index;
+
 /** 根据标题下标值重置标题文字 */
 - (void)resetTitle:(NSString *)title forIndex:(NSInteger)index;
 /** 重置指示器颜色 */

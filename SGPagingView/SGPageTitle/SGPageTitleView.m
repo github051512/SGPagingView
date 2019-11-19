@@ -38,6 +38,7 @@
 @property (nonatomic, strong) NSMutableArray *VSeparatorMArr;
 /// tempBtn
 @property (nonatomic, strong) UIButton *tempBtn;
+
 /// 记录所有按钮文字宽度
 @property (nonatomic, assign) CGFloat allBtnTextWidth;
 /// 记录所有子控件的宽度
@@ -527,6 +528,54 @@
     };
 }
 
+/** 根据下标值添加带有数字的 badgeNumber Lab */
+- (void)addBadgeNumberValueForIndex:(NSInteger)index badgeNumber:(NSInteger)badgeNumber;{
+     
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.02 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        NSString *badgeValueString = [NSString stringWithFormat:@"%zd",badgeNumber];
+        
+        UIButton *btn = self.btnMArr[index];
+        UILabel *badgeNumberLab = [[UILabel alloc] init];
+        
+        CGFloat btnTextWidth = [self P_sizeWithString:btn.currentTitle font:self.configure.titleFont].width;
+        CGFloat btnTextHeight = [self P_sizeWithString:btn.currentTitle font:self.configure.titleFont].height;
+        
+        CGFloat badgeWidth = self.configure.badgeNumberSize;
+        CGFloat badgeHeight = badgeWidth;
+        
+        CGFloat badgeX = 0.5 * (btn.SG_width - btnTextWidth) + btnTextWidth + self.configure.badgeNumberOff.x;
+        CGFloat badgeY =  0.5 * (btn.SG_height - btnTextHeight) + self.configure.badgeOff.y - badgeHeight * 0.5 ;
+        
+        badgeNumberLab.frame = CGRectMake(badgeX, badgeY, badgeWidth, badgeHeight);
+        badgeNumberLab.backgroundColor = self.configure.badgeNumberBackgroudColor;
+        badgeNumberLab.textColor = self.configure.badgeNumberTextColor;
+        badgeNumberLab.textAlignment = NSTextAlignmentCenter;
+        badgeNumberLab.font = [UIFont systemFontOfSize:self.configure.badgeNumberFontSize];
+        badgeNumberLab.text = badgeValueString;
+        badgeNumberLab.layer.cornerRadius = 0.5 * badgeHeight;
+        badgeNumberLab.layer.masksToBounds = YES;
+        [badgeNumberLab adjustsFontSizeToFitWidth];
+        
+        [btn addSubview:badgeNumberLab];
+    });
+}
+
+- (void)removeBadgeNumberValueForIndex:(NSInteger)index {
+       
+    UIButton *btn = self.btnMArr[index];
+    
+    [btn.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+
+        if ([obj isMemberOfClass:[UILabel class]]) {
+        
+            [obj removeFromSuperview];
+            
+            obj = nil;
+        }
+    }];
+}
+
 /** 根据下标值添加 badge */
 - (void)addBadgeForIndex:(NSInteger)index {
     /// 这里使用GCD延迟函数的目的：是将 addBadgeForIndex 方法内部的 badge 布局在 layoutSubviews 之后调用，这里的 badge 是添加在标题（按钮），badge 的布局也可在 layoutSubviews 中在标题（按钮）布局之后布局。这里采取了GCD延迟函数
@@ -559,6 +608,8 @@
         }
     }];
 }
+
+
 
 /**
  *  根据标题下标值重置标题文字
