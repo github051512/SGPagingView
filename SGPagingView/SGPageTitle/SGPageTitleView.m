@@ -336,6 +336,9 @@
 
 #pragma mark - - - 标题按钮的点击事件
 - (void)P_btn_action:(UIButton *)button {
+    
+    [self p_refreshBadgeNumberBgColorAndBadgeTextColorWithIndex: button.tag];
+    
     // 1、改变按钮的选择状态
     [self P_changeSelectedButton:button];
     // 2、标题滚动样式下选中标题居中处理
