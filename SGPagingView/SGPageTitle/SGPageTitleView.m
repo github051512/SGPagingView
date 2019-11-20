@@ -475,6 +475,11 @@
     // 1、取出 originalBtn、targetBtn
     UIButton *originalBtn = self.btnMArr[originalIndex];
     UIButton *targetBtn = self.btnMArr[targetIndex];
+    
+    if (progress >= 0.8) {
+        [self p_refreshBadgeNumberBgColorAndBadgeTextColorWithIndex:targetIndex];
+    }
+    
     _signBtnIndex = targetBtn.tag;
     // 2、标题滚动样式下选中标题居中处理
     if (self.allBtnWidth > self.frame.size.width) {
@@ -555,10 +560,12 @@
         badgeNumberLab.text = badgeValueString;
         badgeNumberLab.layer.cornerRadius = 0.5 * badgeHeight;
         badgeNumberLab.layer.masksToBounds = YES;
-        badgeNumberLab.tag = 888;
+        badgeNumberLab.tag = 888 + index;
         [badgeNumberLab adjustsFontSizeToFitWidth];
-        
         [btn addSubview:badgeNumberLab];
+        
+        UILabel *llaabb = [btn viewWithTag:888+index];
+        NSLog(@"%@",llaabb);
     });
 }
 
@@ -1196,23 +1203,16 @@
 - (void)p_refreshBadgeNumberBgColorAndBadgeTextColorWithIndex:(NSInteger)index {
 
     for (NSInteger tempIndex = 0; tempIndex < self.btnMArr.count; tempIndex++) {
-
-        UIButton *btn = self.btnMArr[tempIndex];
-
-        UILabel *label = [btn viewWithTag:888+index];
-
-        if (!label) {
-            return;
-        }
         
         if (index == tempIndex) {
             
+            UILabel *label = [self viewWithTag:888+tempIndex];
             label.backgroundColor = self.configure.badgeNumberSelectedBackgroudColor;
             label.textColor = self.configure.badgeNumberSelectedTextColor;
             
         } else {
-            
-            label.backgroundColor = self.configure.badgeNumberSelectedBackgroudColor;
+            UILabel *label = [self viewWithTag:888+tempIndex];
+            label.backgroundColor = self.configure.badgeNumberBackgroudColor;
             label.textColor = self.configure.badgeNumberTextColor;
         }
     }
@@ -1222,7 +1222,6 @@
 - (void)setResetSelectedIndex:(NSInteger)resetSelectedIndex {
     _resetSelectedIndex = resetSelectedIndex;
     [self P_btn_action:self.btnMArr[resetSelectedIndex]];
-    [self p_refreshBadgeNumberBgColorAndBadgeTextColorWithIndex:resetSelectedIndex];
 }
 
 #pragma mark - - - 计算字符串尺寸

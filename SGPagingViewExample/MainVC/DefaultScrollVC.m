@@ -59,12 +59,19 @@
     SGPageTitleViewConfigure *configure = [SGPageTitleViewConfigure pageTitleViewConfigure];
     configure.indicatorAdditionalWidth = 10; // 说明：指示器额外增加的宽度，不设置，指示器宽度为标题文字宽度；若设置无限大，则指示器宽度为按钮宽度
     configure.titleGradientEffect = YES;
+    configure.badgeNumberSelectedTextColor = [UIColor whiteColor];
+    configure.badgeNumberTextColor = [UIColor blueColor];
+    configure.badgeNumberSelectedBackgroudColor = [UIColor redColor];
+    configure.badgeNumberBackgroudColor = [UIColor blackColor];
     
     /// pageTitleView
     self.pageTitleView = [SGPageTitleView pageTitleViewWithFrame:CGRectMake(0, pageTitleViewY, self.view.frame.size.width, 44) delegate:self titleNames:titleArr configure:configure];
     [self.view addSubview:_pageTitleView];
-    [_pageTitleView addBadgeForIndex:1];
-    [_pageTitleView addBadgeForIndex:5];
+//    [_pageTitleView addBadgeForIndex:1];
+//    [_pageTitleView addBadgeForIndex:5];
+    
+    [_pageTitleView addBadgeNumberValueForIndex:1 badgeNumber:2];
+    [_pageTitleView addBadgeNumberValueForIndex:3 badgeNumber:4];
     
     ChildVCOne *oneVC = [[ChildVCOne alloc] init];
     ChildVCTwo *twoVC = [[ChildVCTwo alloc] init];
