@@ -199,11 +199,26 @@
     return _badgeNumberBackgroudColor;
 }
 
+- (UIColor *)badgeNumberSelectedBackgroudColor {
+    if (!_badgeNumberSelectedBackgroudColor) {
+        _badgeNumberSelectedBackgroudColor = [UIColor redColor];
+//[UIColor colorWithRed:166/255.0 green:166/255.0 blue:166/255.0f alpha:1];
+    }
+    return _badgeNumberSelectedBackgroudColor;
+}
+
 - (UIColor *)badgeNumberTextColor {
     if (!_badgeNumberTextColor) {
         _badgeNumberTextColor = [UIColor whiteColor];
     }
     return _badgeNumberTextColor;
+}
+
+- (UIColor *)badgeNumberSelectedTextColor {
+    if (!_badgeNumberSelectedTextColor) {
+        _badgeNumberSelectedTextColor = [UIColor whiteColor]; //[UIColor colorWithRed:39/255.0 green:42/255.0 blue:54/255.0f alpha:1];
+    }
+    return _badgeNumberSelectedTextColor;
 }
 
 - (CGFloat)badgeNumberSize {

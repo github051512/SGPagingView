@@ -112,8 +112,13 @@ typedef enum : NSUInteger {
 #pragma mark - - badgeNumber 相关属性
 /** badgebLabel的背景颜色，默认红色 */
 @property (nonatomic, strong) UIColor *badgeNumberBackgroudColor;
+/** badgebLabel被选中的背景颜色，默认#A6A6A6 */
+@property (nonatomic, strong) UIColor *badgeNumberSelectedBackgroudColor;
 /** badgebLabel的文字颜色，默认白色 */
 @property (nonatomic, strong) UIColor *badgeNumberTextColor;
+/** badgebLabel的被选中的文字颜色，默认#272A36 */
+@property (nonatomic, strong) UIColor *badgeNumberSelectedTextColor;
+
 /** badgebLabel的文字字体，默认12 */
 @property (nonatomic, assign) CGFloat badgeNumberFontSize;
 /** badge 尺寸大小，默认为 14.0f */

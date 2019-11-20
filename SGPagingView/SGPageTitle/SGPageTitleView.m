@@ -555,6 +555,7 @@
         badgeNumberLab.text = badgeValueString;
         badgeNumberLab.layer.cornerRadius = 0.5 * badgeHeight;
         badgeNumberLab.layer.masksToBounds = YES;
+        badgeNumberLab.tag = 888;
         [badgeNumberLab adjustsFontSizeToFitWidth];
         
         [btn addSubview:badgeNumberLab];
@@ -1191,10 +1192,37 @@
     targetBtn.titleLabel.textColor = targetColor;
 }
 
+#pragma mark - - - 修改Badge背景颜色和文字颜色
+- (void)p_refreshBadgeNumberBgColorAndBadgeTextColorWithIndex:(NSInteger)index {
+
+    for (NSInteger tempIndex = 0; tempIndex < self.btnMArr.count; tempIndex++) {
+
+        UIButton *btn = self.btnMArr[tempIndex];
+
+        UILabel *label = [btn viewWithTag:888+index];
+
+        if (!label) {
+            return;
+        }
+        
+        if (index == tempIndex) {
+            
+            label.backgroundColor = self.configure.badgeNumberSelectedBackgroudColor;
+            label.textColor = self.configure.badgeNumberSelectedTextColor;
+            
+        } else {
+            
+            label.backgroundColor = self.configure.badgeNumberSelectedBackgroudColor;
+            label.textColor = self.configure.badgeNumberTextColor;
+        }
+    }
+}
+
 #pragma mark - - - set
 - (void)setResetSelectedIndex:(NSInteger)resetSelectedIndex {
     _resetSelectedIndex = resetSelectedIndex;
     [self P_btn_action:self.btnMArr[resetSelectedIndex]];
+    [self p_refreshBadgeNumberBgColorAndBadgeTextColorWithIndex:resetSelectedIndex];
 }
 
 #pragma mark - - - 计算字符串尺寸
